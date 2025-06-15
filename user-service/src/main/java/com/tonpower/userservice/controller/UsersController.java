@@ -4,6 +4,8 @@ import com.tonpower.userservice.common.BaseResponse;
 import com.tonpower.userservice.common.ResultUtils;
 import com.tonpower.userservice.exception.ErrorCode;
 import com.tonpower.userservice.exception.ThrowUtils;
+import com.tonpower.userservice.model.dto.users.UsersLoginRequest;
+import com.tonpower.userservice.model.vo.LoginUserVO;
 import com.tonpower.userservice.service.UsersService;
 import com.tonpower.userservice.model.dto.users.UsersRegisterRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -33,5 +35,13 @@ public class UsersController {
         String checkPassword = usersRegisterRequest.getCheckPassword();
         long result = usersService.userRegister(userName, password, checkPassword);
         return ResultUtils.success(result);
+    }
+    @PostMapping("/login")
+    public BaseResponse<LoginUserVO> userLogin(@RequestBody UsersLoginRequest usersLoginRequest){
+        ThrowUtils.throwIf(usersLoginRequest == null, ErrorCode.PARAMS_ERROR);
+        String username = usersLoginRequest.getUsername();
+        String password = usersLoginRequest.getPassword();
+        LoginUserVO loginUserVO = usersService.userLogin(username, password);
+        return ResultUtils.success(loginUserVO);
     }
 }
