@@ -8,13 +8,11 @@ import com.tonpower.userservice.config.JwtConfig;
 import com.tonpower.userservice.exception.BusinessException;
 import com.tonpower.userservice.exception.ErrorCode;
 import com.tonpower.userservice.mapper.UsersMapper;
-
-import com.tonpower.userservice.model.vo.LoginUserVO;
-import com.tonpower.userservice.model.vo.UserVO;
-import com.tonpower.userservice.service.UsersService;
 import com.tonpower.userservice.model.entity.Users;
-
+import com.tonpower.userservice.model.vo.LoginUserVO;
+import com.tonpower.userservice.service.UsersService;
 import com.tonpower.userservice.util.JwtUtils;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -33,6 +31,7 @@ import java.util.HashMap;
  */
 @Service
 @Slf4j
+@GlobalTransactional
 public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         implements UsersService {
     @Resource

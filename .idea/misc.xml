@@ -6,10 +6,13 @@
       <list>
         <option value="$PROJECT_DIR$/test_sharding/pom.xml" />
         <option value="$PROJECT_DIR$/user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/permission-service/pom.xml" />
+        <option value="$PROJECT_DIR$/permission-service/permission-service-api/pom.xml" />
+        <option value="$PROJECT_DIR$/permission-service/permission-service-provider/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

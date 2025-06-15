@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.tonpower.userservice.model.entity.Users;
 import com.tonpower.userservice.model.vo.LoginUserVO;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author 86166
  * @ClassName UsersService

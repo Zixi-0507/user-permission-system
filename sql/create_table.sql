@@ -36,7 +36,10 @@ CREATE TABLE IF NOT EXISTS roles
 (
     role_id   INT PRIMARY KEY COMMENT '角色ID（1-超管，2-普通用户，3-管理员）',
     role_code VARCHAR(20) UNIQUE COMMENT '角色编码（super_admin/user/admin）',
-    role_name VARCHAR(50) NOT NULL COMMENT '角色名称（如"超级管理员"）'
+    role_name VARCHAR(50) NOT NULL COMMENT '角色名称（如"超级管理员"）',
+    gmt_create   datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    gmt_modified datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    is_deleted   tinyint  default 0                 not null comment '是否删除'
 ) COMMENT '角色表' COLLATE = utf8mb4_general_ci
                    ENGINE = InnoDB;
 
@@ -49,17 +52,23 @@ CREATE TABLE IF NOT EXISTS user_roles
     role_id INT    NOT NULL COMMENT '角色ID',
     UNIQUE KEY uk_user_role (user_id),
     KEY idx_role_id (role_id),
-    FOREIGN KEY (role_id) REFERENCES roles (role_id)
+    FOREIGN KEY (role_id) REFERENCES roles (role_id),
+    gmt_create   datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    gmt_modified datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    is_deleted   tinyint  default 0                 not null comment '是否删除'
 ) COMMENT '用户-角色关联表' COLLATE = utf8mb4_general_ci
                             ENGINE = InnoDB;
 -- 操作日志表（单库）
 CREATE TABLE operation_logs
 (
-    log_id  BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id BIGINT,
-    action  VARCHAR(50), -- 如 "update_user"
-    ip      VARCHAR(15),
-    detail  TEXT         -- 记录修改内容（如 {"field":"email", "old":"a","new":"b"}）
+    log_id       BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id      BIGINT,
+    action       VARCHAR(50), -- 如 "update_user"
+    ip           VARCHAR(15),
+    detail       TEXT,        -- 记录修改内容（如 {"field":"email", "old":"a","new":"b"}）
+    gmt_create   datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    gmt_modified datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    is_deleted   tinyint  default 0                 not null comment '是否删除'
 );
 
 
