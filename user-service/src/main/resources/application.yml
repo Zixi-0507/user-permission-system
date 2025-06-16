@@ -3,6 +3,7 @@ server:
   servlet:
     context-path: /api
 spring:
+
   shardingsphere:
     datasource:
       names: ds0,ds1,ds2
@@ -61,13 +62,19 @@ spring:
   #    import: optional:nacos
   cloud:
     nacos:
+
       discovery:
         server-addr: localhost:8848
       config:
+        import-check:
+          enabled: false
         server-addr: localhost:8848
+  # 数据库配置
+  # ShardingSphere configuration
 
 
-# mybatis-plus
+
+
 mybatis-plus:
   configuration:
     # MyBatis 配置
@@ -91,4 +98,15 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.tonpower.userservice.controller
+dubbo:
+  application:
+    name: user-service-consumer
+  registry:
+    address: nacos://localhost:8848  # Dubbo 使用 Nacos 做注册中心
 
+seata:
+  enable-auto-data-source-proxy: false
+  tx-service-group: default_tx_group
+  service:
+    vgroup-mapping:
+      default_tx_group: default

@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.tonpower.permissionserviceapi.PermissionService;
 import com.tonpower.userservice.config.JwtConfig;
 import com.tonpower.userservice.exception.BusinessException;
 import com.tonpower.userservice.exception.ErrorCode;
@@ -15,6 +16,8 @@ import com.tonpower.userservice.util.JwtUtils;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.DubboReference;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -36,6 +39,9 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         implements UsersService {
     @Resource
     private JwtConfig jwtConfig;
+    // 注入远程服务（Dubbo）
+    @DubboReference(group = "permission-group", version = "1.0.0")
+    private PermissionService permissionService;
 
     /**
      * 用户注册
@@ -46,6 +52,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
      */
     @Override
     public long userRegister(String username, String password, String checkPassword) {
+
         //1. 校验
         if(StringUtils.isAnyBlank(username, password, checkPassword)){
             throw new BusinessException(ErrorCode.PARAMS_ERROR,"参数为空");
@@ -78,6 +85,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
             throw new BusinessException(ErrorCode.SYSTEM_ERROR,"注册失败");
         }
         //TODO 绑定默认角色
+        permissionService.bindDefaultRole(users.getUserId());
+        log.info("用户注册成功，用户id：{}",users.getUserId());
         //TODO 发送注册日志
         return users.getUserId();
     }
