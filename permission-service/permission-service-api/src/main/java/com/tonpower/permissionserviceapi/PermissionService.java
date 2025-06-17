@@ -19,5 +19,4 @@ public interface PermissionService {
 
     // 超管调用：降级用户为普通角色
     void downgradeToUser(Long userId);
-    String sayHello(String name);
 }
