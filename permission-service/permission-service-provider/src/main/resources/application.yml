@@ -11,6 +11,18 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/auth_db?autoReconnect=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&
     username: root
     password: "050704"
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        handleMessage-out-0:
+          destination: logging-service-topic
+        handleMessage-in-0:
+            destination: logging-service-topic
 #mybatis-plus
 mybatis-plus:
   configuration:
@@ -29,11 +41,6 @@ mybatis-plus:
 dubbo:
   scan:
     basePackages: com.permissionserviceprovider.service
-  registry:
-    address: nacos://localhost:8848
-    # This will enable application-level service discovery only (the recommended service discovery method for Dubbo3).
-    # For users upgrading from Dubbo2.x, please set the value to 'all' for smooth migration.
-    register-mode: instance
   protocol:
     name: tri
     port: 20881
@@ -43,3 +50,8 @@ dubbo:
     qos-port: 22222
     qos-accept-foreign-ip: false
     logger: slf4j
+  registry:
+    address: nacos://localhost:8848
+    # This will enable application-level service discovery only (the recommended service discovery method for Dubbo3).
+    # For users upgrading from Dubbo2.x, please set the value to 'all' for smooth migration.
+    register-mode: instance

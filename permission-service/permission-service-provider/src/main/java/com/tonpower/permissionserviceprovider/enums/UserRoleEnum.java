@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @date 2025-06-15 15:59
  */
 
-public enum RoleEnum {
+public enum UserRoleEnum {
     SUPER_ADMIN(1, "super_admin", "超级管理员"),
     USER(2, "user", "普通用户"),
     ADMIN(3, "admin", "管理员");
@@ -22,7 +22,7 @@ public enum RoleEnum {
     private final String roleCode;
     private final String roleName;
 
-    RoleEnum(int roleId, String roleCode, String roleName) {
+    UserRoleEnum(int roleId, String roleCode, String roleName) {
         this.roleId = roleId;
         this.roleCode = roleCode;
         this.roleName = roleName;
@@ -43,11 +43,11 @@ public enum RoleEnum {
      * @param roleId
      * @return
      */
-    public static RoleEnum getEnumByRoleId(Integer roleId) {
+    public static UserRoleEnum getEnumByRoleId(Integer roleId) {
         if (ObjectUtils.isEmpty(roleId)) {
             return null;
         }
-        for (RoleEnum anEnum : RoleEnum.values()) {
+        for (UserRoleEnum anEnum : UserRoleEnum.values()) {
             if (anEnum.roleId.equals(roleId)) {
                 return anEnum;
             }
@@ -55,11 +55,11 @@ public enum RoleEnum {
         return null;
     }
 
-    public static RoleEnum getEnumByRoleCode(String roleCode) {
+    public static UserRoleEnum getEnumByRoleCode(String roleCode) {
         if (ObjectUtils.isEmpty(roleCode)) {
             return null;
         }
-        for (RoleEnum anEnum : RoleEnum.values()) {
+        for (UserRoleEnum anEnum : UserRoleEnum.values()) {
             if (anEnum.roleCode.equals(roleCode)) {
                 return anEnum;
             }

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/permission-service/permission-service-provider/permission-service-provider.iml" filepath="$PROJECT_DIR$/permission-service/permission-service-provider/permission-service-provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/user-permission-system.iml" filepath="$PROJECT_DIR$/.idea/user-permission-system.iml" />
     </modules>
   </component>
