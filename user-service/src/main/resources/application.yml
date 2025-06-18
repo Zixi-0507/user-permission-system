@@ -1,0 +1,137 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: user-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        group: DEFAULT_GROUP
+        namespace: "public"
+      config:
+        import-check:
+          enabled: false
+        server-addr: localhost:8848
+    stream:
+      bindings:
+        handleMessage-out-0:
+          destination: logging-service-topic
+        handleMessage-in-0:
+          destination: logging-service-topic
+  # mq配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  # shardingsphere配置
+  shardingsphere:
+    datasource:
+      names: ds0,ds1,ds2
+      ds0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/user_db_0?serverTimezone=UTC
+        username: root
+        password: "050704"
+      ds1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/user_db_1?serverTimezone=UTC
+        username: root
+        password: "050704"
+      ds2:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/user_db_2?serverTimezone=UTC
+        username: root
+        password: "050704"
+    rules:
+      sharding:
+        key-generators:
+          snowflake:
+            type: SNOWFLAKE
+            props:
+              worker-id: 666
+        tables:
+          users:
+            actual-data-nodes: ds$->{0..2}.users
+            key-generate-strategy:
+              column: user_id
+              key-generator-name: snowflake
+            database-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: database-line
+
+        sharding-algorithms:
+          database-line:
+            type: INLINE
+            props:
+              algorithm-expression: ds$->{user_id % 3}
+    props:
+      sql-show: true
+  main:
+    allow-bean-definition-overriding: true
+# mybatis-plus配置
+mybatis-plus:
+  configuration:
+    # MyBatis 配置
+    map-underscore-to-camel-case: true
+    # 仅在开发环境打印日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    enable-sql-runner: true
+    db-config:
+      logic-delete-field: is_deleted # 全局逻辑删除的实体字段名
+      logic-delete-value: 1 # 逻辑已删除值（默认为 1）
+      logic-not-delete-value: 0 # 逻辑未删除值（默认为 0）
+# 接口文档配置
+knife4j:
+  enable: true
+  openapi:
+    title: "接口文档"
+    version: 1.0
+    group:
+      default:
+        api-rule: package
+        api-rule-resources:
+          - com.tonpower.userservice.controller
+# dubbo配置
+dubbo:
+  application:
+    name: user-service-consumer
+  registry:
+    address: nacos://localhost:8848  # Dubbo 使用 Nacos 做注册中心
+
+
+seata:
+  # 这里直接关闭，不要怀疑，因为我们使用是shardingsphere集成Seata柔性事务，已在resource目录下的seata.conf中配置，seata其实被shardingsphere包装了
+  enabled: false
+  # 由于使用了分库分表数据源，这里必须要关闭自动代理，由shardingsphere代理数据源
+  enable-auto-data-source-proxy: false
+  application-id: user-service
+  # 事务组, 直接设置为项目名即可
+  tx-service-group: user-service-group
+  service: # 如果配置中心用nacos, 可以将该配置写到nacos config中
+    vgroup-mapping:
+      user-service-group: default
+  registry:
+    type: nacos
+    nacos:
+      server-addr: localhost:8848
+      group: SEATA_GROUP
+      namespace: "local"
+  config:
+    type: nacos
+    nacos:
+      server-addr: localhost:8848
+      namespace: "local"
+      group: SEATA_GROUP
+      data-id: seataServer.properties
+
+
+
