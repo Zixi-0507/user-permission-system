@@ -16,16 +16,22 @@ public class LogConsumer {
     @Bean
     public Consumer<String> handleMessage() {
         return message -> {
+            OperationLogs log = new OperationLogs();
             JSONObject data = JSONUtil.parseObj(message);
             String action = data.getStr("action");
             Long userId = data.getLong("userId");
             String ip = data.getStr("ip");
-            OperationLogs log = new OperationLogs();
+            //如果data中有detail字段，则保存detail字段的值
+            if(data.containsKey("detail")){
+                String detail=data.getStr("detail");
+                log.setDetail(detail);
+            }else{
+                log.setDetail(message);
+            }
             log.setAction(action);
             log.setUserId(userId);
             log.setIp(ip);
-            // 原始消息作为 detail
-            log.setDetail(message);
+
             operationLogsService.save(log);
             System.out.println("Saved log: " + message);
         };

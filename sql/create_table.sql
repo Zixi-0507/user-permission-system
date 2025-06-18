@@ -15,10 +15,10 @@ use log_db;
 -- 用户表
 create table if not exists users
 (
-    user_id      bigint  comment '用户id' primary key,
+    user_id      bigint comment '用户id' primary key,
     username     varchar(256)                       null comment '登录账号',
-    email        VARCHAR(100),
-    phone        VARCHAR(20),
+    email        VARCHAR(100)                       null comment '邮箱',
+    phone        VARCHAR(20)                        null comment '手机号',
     password     varchar(512)                       not null comment '密码',
     user_avatar  varchar(1024)                      null comment '用户头像',
     user_profile varchar(512)                       null comment '用户简介',
@@ -71,5 +71,39 @@ CREATE TABLE operation_logs
     is_deleted   tinyint  default 0                 not null comment '是否删除'
 );
 
+# AT模式需要使用的表(无论是否分库分表，只要是分库就必须在所有的业务库中创建该表)
+CREATE TABLE `undo_log`
+(
+    `id`            bigint(20)   NOT NULL AUTO_INCREMENT,
+    `branch_id`     bigint(20)   NOT NULL COMMENT 'branch transaction id',
+    `xid`           varchar(100) NOT NULL COMMENT 'global transaction id',
+    `context`       varchar(128) NOT NULL COMMENT 'undo_log context,such as serialization',
+    `rollback_info` longblob     NOT NULL COMMENT 'rollback info',
+    `log_status`    int(11)      NOT NULL COMMENT '0:normal status,1:defense status',
+    `log_created`   datetime     NOT NULL COMMENT 'create datetime',
+    `log_modified`  datetime     NOT NULL COMMENT 'modify datetime',
+    `ext`           varchar(100) DEFAULT NULL COMMENT 'ext info',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8;
 
+-- =========   注意区分是否tcc_fence_log分库分表，不分库分表，数据库位于00库下即可 ========
+
+--  不分库分表，数据库位于00库下，性能不够，可考虑分库分表
+-- TCC 模式需要使用的表
+CREATE TABLE IF NOT EXISTS `tcc_fence_log`
+(
+    `xid`          VARCHAR(128) NOT NULL COMMENT 'global id',
+    `branch_id`    BIGINT       NOT NULL COMMENT 'branch id',
+    `action_name`  VARCHAR(64)  NOT NULL COMMENT 'action name',
+    `status`       TINYINT      NOT NULL COMMENT 'status(tried:1;committed:2;rollbacked:3;suspended:4)',
+    `gmt_create`   DATETIME(3)  NOT NULL COMMENT 'create time',
+    `gmt_modified` DATETIME(3)  NOT NULL COMMENT 'update time',
+    PRIMARY KEY (`xid`, `branch_id`),
+    KEY `idx_gmt_modified` (`gmt_modified`),
+    KEY `idx_status` (`status`)
+    ) ENGINE = InnoDB
+    DEFAULT CHARSET = utf8mb4;
 

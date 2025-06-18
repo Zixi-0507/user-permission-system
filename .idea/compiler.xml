@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="permission-service-api" />
+        <module name="user-service" />
         <module name="permission-service-provider" />
         <module name="logging-service" />
-        <module name="permission-service-api" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
       <module name="logging-service" options="-parameters" />
       <module name="permission-service-api" options="-parameters" />
       <module name="permission-service-provider" options="-parameters" />
+      <module name="user-service" options="-parameters" />
     </option>
   </component>
 </project>
