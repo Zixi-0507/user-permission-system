@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="700" height="500" viewBox="0 0 700 500">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="nacosGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5D9CEC" />
+      <stop offset="100%" stop-color="#4A89DC" />
+    </linearGradient>
+    <linearGradient id="userGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#48CFAD" />
+      <stop offset="100%" stop-color="#37BC9B" />
+    </linearGradient>
+    <linearGradient id="permissionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4FC1E9" />
+      <stop offset="100%" stop-color="#3BAFDA" />
+    </linearGradient>
+    <linearGradient id="mqGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFCE54" />
+      <stop offset="100%" stop-color="#F6BB42" />
+    </linearGradient>
+    <linearGradient id="loggingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#AC92EC" />
+      <stop offset="100%" stop-color="#967ADC" />
+    </linearGradient>
+    
+    <!-- 阴影滤镜 -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="3" dy="3" stdDeviation="5" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+    
+    <!-- 箭头标记 -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="700" height="500" fill="#F5F7FA" rx="10" ry="10" />
+  
+  <!-- 服务框 -->
+  <!-- Nacos 服务注册中心 -->
+  <rect x="275" y="50" width="150" height="80" rx="10" ry="10" fill="url(#nacosGradient)" filter="url(#shadow)" />
+  <text x="350" y="85" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">Nacos</text>
+  <text x="350" y="105" font-family="Arial" font-size="12" fill="white" text-anchor="middle">服务注册发现</text>
+  
+  <!-- 用户服务 -->
+  <rect x="100" y="200" width="150" height="80" rx="10" ry="10" fill="url(#userGradient)" filter="url(#shadow)" />
+  <text x="175" y="235" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">用户服务</text>
+  <text x="175" y="255" font-family="Arial" font-size="12" fill="white" text-anchor="middle">(user-service)</text>
+  
+  <!-- 权限服务 -->
+  <rect x="450" y="200" width="150" height="80" rx="10" ry="10" fill="url(#permissionGradient)" filter="url(#shadow)" />
+  <text x="525" y="235" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">权限服务</text>
+  <text x="525" y="255" font-family="Arial" font-size="12" fill="white" text-anchor="middle">(permission-service)</text>
+  
+  <!-- 消息队列 -->
+  <rect x="100" y="350" width="150" height="80" rx="10" ry="10" fill="url(#mqGradient)" filter="url(#shadow)" />
+  <text x="175" y="385" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">消息队列</text>
+  <text x="175" y="405" font-family="Arial" font-size="12" fill="white" text-anchor="middle">(RabbitMQ)</text>
+  
+  <!-- 日志服务 -->
+  <rect x="450" y="350" width="150" height="80" rx="10" ry="10" fill="url(#loggingGradient)" filter="url(#shadow)" />
+  <text x="525" y="385" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">日志服务</text>
+  <text x="525" y="405" font-family="Arial" font-size="12" fill="white" text-anchor="middle">(logging-service)</text>
+  
+  <!-- 连接线 -->
+  <!-- Nacos到用户服务的双向箭头 -->
+  <line x1="275" y1="90" x2="200" y2="200" stroke="#666" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead)" />
+  <line x1="200" y1="200" x2="275" y2="90" stroke="#666" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead)" />
+  
+  <!-- Nacos到权限服务的双向箭头 -->
+  <line x1="425" y1="90" x2="500" y2="200" stroke="#666" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead)" />
+  <line x1="500" y1="200" x2="425" y2="90" stroke="#666" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead)" />
+  
+  <!-- 用户服务到权限服务的箭头 -->
+  <line x1="250" y1="240" x2="450" y2="240" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)" />
+  <text x="350" y="230" font-family="Arial" font-size="12" fill="#666" text-anchor="middle">RPC</text>
+  
+  <!-- 用户服务到消息队列的箭头 -->
+  <line x1="175" y1="280" x2="175" y2="350" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- 权限服务到日志服务的箭头 -->
+  <line x1="525" y1="280" x2="525" y2="350" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- 消息队列到日志服务的箭头 -->
+  <line x1="250" y1="390" x2="450" y2="390" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- 标题 -->
+  <text x="350" y="30" font-family="Arial" font-size="20" font-weight="bold" fill="#333" text-anchor="middle">用户权限系统服务架构</text>
+</svg>

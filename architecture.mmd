@@ -1,0 +1,122 @@
+```mermaid
+graph TB
+    %% 样式定义
+    classDef clientLayer fill:#3498db,color:#fff,stroke:#2980b9
+    classDef gatewayLayer fill:#2ecc71,color:#fff,stroke:#27ae60
+    classDef serviceLayer fill:#e74c3c,color:#fff,stroke:#c0392b
+    classDef dataLayer fill:#9b59b6,color:#fff,stroke:#8e44ad
+    classDef infraLayer fill:#34495e,color:#fff,stroke:#2c3e50
+    classDef registryLayer fill:#f1c40f,color:#fff,stroke:#f39c12
+    classDef mqLayer fill:#e67e22,color:#fff,stroke:#d35400
+
+    %% 客户端层
+    subgraph ClientLayer[客户端层]
+        WebApp[Web前端<br/>React/Vue]
+        MobileApp[移动端<br/>iOS/Android]
+        ThirdParty[第三方API<br/>调用]
+    end
+    
+    %% 接入层
+    subgraph GatewayLayer[接入层]
+        Gateway[API Gateway<br/>Spring Cloud Gateway]
+        LoadBalancer[负载均衡<br/>Dubbo]
+        Auth[身份认证<br/>JWT]
+    end
+
+    %% 服务注册与发现
+    Registry[服务注册中心<br/>Nacos]
+    
+    %% 微服务层
+    subgraph ServiceLayer[微服务层]
+        UserService[用户服务<br/>User Service]
+        PermissionService[权限服务<br/>Permission Service]
+        LoggingService[日志服务<br/>Logging Service]
+        MQ[消息队列<br/>RabbitMQ]
+    end
+    
+    %% 数据层
+    subgraph DataLayer[数据层]
+        MySQL[MySQL +<br/>ShardingSphere]
+        Redis[Redis集群<br/>缓存]
+    end
+    
+    %% 基础设施层
+    subgraph InfraLayer[基础设施层]
+        K8s[容器编排<br/>K8s + Docker]
+        Monitor[监控平台<br/>Prometheus + Grafana]
+        ELK[日志收集<br/>ELK Stack]
+        CICD[持续集成/部署<br/>Jenkins]
+    end
+
+    %% 连接关系
+    %% 客户端到网关
+    WebApp -->|HTTPS| Gateway
+    MobileApp -->|HTTPS| Gateway
+    ThirdParty -->|HTTPS| Gateway
+    
+    %% 网关层内部
+    Gateway --> Auth
+    Gateway --> LoadBalancer
+    
+    %% 网关到服务
+    LoadBalancer -->|HTTP/Dubbo| UserService
+    LoadBalancer -->|HTTP/Dubbo| PermissionService
+    LoadBalancer -->|HTTP/Dubbo| LoggingService
+    
+    %% 服务注册
+    Registry -.->|服务发现| LoadBalancer
+    UserService -.->|注册| Registry
+    PermissionService -.->|注册| Registry
+    LoggingService -.->|注册| Registry
+    
+    %% 消息队列通信
+    UserService -->|异步消息| MQ
+    MQ -->|消费| LoggingService
+    
+    %% 服务到数据层
+    UserService -->|SQL| MySQL
+    PermissionService -->|SQL| MySQL
+    UserService -->|Cache| Redis
+    PermissionService -->|Cache| Redis
+    
+    %% 基础设施支持
+    K8s -.->|部署| ServiceLayer
+    Monitor -.->|监控| ServiceLayer
+    ELK -.->|日志采集| ServiceLayer
+    CICD -.->|自动化部署| ServiceLayer
+
+    %% 应用样式
+    class WebApp,MobileApp,ThirdParty clientLayer
+    class Gateway,LoadBalancer,Auth gatewayLayer
+    class UserService,PermissionService,LoggingService serviceLayer
+    class MySQL,Redis dataLayer
+    class K8s,Monitor,ELK,CICD infraLayer
+    class Registry registryLayer
+    class MQ mqLayer
+```
+
+| name    | type    | desc                           |
+|---------|---------|--------------------------------|
+| code    | integer | 状态码，0表示成功，非0表示失败     |
+| data    | object  | 响应业务数据                     |
+| └─records | array   | 分页数据列表                     |
+| └─└─    | object  | 单条记录对象                     |
+| └─└─userId   | integer | id                             |
+| └─└─username | string  | 账号                           |
+| └─└─userAvatar | string  | 用户头像                       |
+| └─└─userProfile | string  | 用户简介                       |
+| └─└─userRole | string  | 用户角色: user/admin/ban        |
+| └─└─createTime | string  | 创建时间                       |
+| └─total  | integer | 总条数                         |
+| └─size   | integer | 每页条数                       |
+| └─current | integer | 当前页号                       |
+| └─orders | array   | 升序/降序                      |
+| └─└─    | object  | 排序对象                       |
+| └─└─column | string  | 排序字段                       |
+| └─└─asc | boolean | 是否升序                       |
+| └─optimizeCountSql | boolean | 是否优化COUNT SQL              |
+| └─searchCount | boolean | 是否进行count查询               |
+| └─optimizeJoinOfCountSql | boolean | 优化count的join查询           |
+| └─maxLimit | integer | 最大返回条数                    |
+| └─countId | string  | 自定义count字段                  |
+| message | string  | 状态描述，成功为"success"，失败为具体错误信息 |

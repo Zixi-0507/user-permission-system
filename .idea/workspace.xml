@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0b8bd557-b24c-4225-8f72-9515b208c2a2" name="Changes" comment="Commit-最后处理细节并提交">
+      <change afterPath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/util/BeanDiffUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/util/IpUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logging-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/logging-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logging-service/src/main/java/com/tonpower/loggingservice/mapper/OperationLogsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/logging-service/src/main/java/com/tonpower/loggingservice/mapper/OperationLogsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/constant/ActionConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/constant/ActionConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/mapper/RolesMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/mapper/RolesMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/mapper/UserRolesMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/mapper/UserRolesMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/service/impl/PermissionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/permission-service/permission-service-provider/src/main/java/com/tonpower/permissionserviceprovider/service/impl/PermissionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/common/DeleteRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/common/DeleteRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/common/PageRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/common/PageRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/common/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/common/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/common/config/JwtConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/common/config/JwtConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/JwtConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/JwtConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/MyBatisPlusConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/MyBatisPlusConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/RedissonConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/RedissonConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/constant/ActionConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/constant/ActionConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/constant/ApiConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/constant/ApiConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/constant/CommonConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/constant/CommonConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/controller/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/controller/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/enums/UserRoleEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/enums/UserRoleEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/interceptor/JwtAuthInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/interceptor/JwtAuthInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/mapper/UsersMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/mapper/UsersMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UserPasswordUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UserPasswordUpdateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersAddRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersAddRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersLoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersLoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersQueryRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersQueryRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersRegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersRegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersUpdateMyRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersUpdateMyRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/model/dto/users/UsersUpdateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/service/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/service/UsersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/service/impl/UsersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/service/impl/UsersServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/util/BeanDiffUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/util/BeanDiffUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/util/IpUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/util/IpUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/util/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/util/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/util/SqlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/tonpower/userservice/util/SqlUtils.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="future-08" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="future-09" />
+                    <option name="lastUsedInstant" value="1750410135" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="future-08" />
+                    <option name="lastUsedInstant" value="1750250018" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="future-07" />
+                    <option name="lastUsedInstant" value="1750213539" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="future-06" />
+                    <option name="lastUsedInstant" value="1750213538" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\tools\maven\apache-maven-3.8.8\repository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../tools/maven/apache-maven-3.8.8" />
+        <option name="userSettingsFile" value="E:\tools\maven\apache-maven-3.8.8\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2yd5TNyqfTI0gx9HxLF6MRXlI7K" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "future-09",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "E:/user-permission-system",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "com.itangcent.idea.plugin.configurable.AccountConfigurable.apifox",
+    "spring.configuration.checksum": "c85b5c7787699bff2591daea396780be",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\user-permission-system" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.tonpower.permissionserviceprovider.constant" />
+      <recent name="com.tonpower.permissionserviceprovider.util" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.LoggingServiceApplication">
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="SHORTEN_COMMAND_LINE" value="ARGS_FILE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoggingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="logging-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tonpower.loggingservice.LoggingServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoggingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="logging-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tonpower.loggingservice.LoggingServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PermissionServiceProviderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="permission-service-provider" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tonpower.permissionserviceprovider.PermissionServiceProviderApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PermissionServiceProviderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="permission-service-provider" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tonpower.permissionserviceprovider.PermissionServiceProviderApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="user-service" />
+      <option name="SHORTEN_COMMAND_LINE" value="ARGS_FILE" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tonpower.userservice.UserServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="SHORTEN_COMMAND_LINE" value="ARGS_FILE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="0b8bd557-b24c-4225-8f72-9515b208c2a2" name="Changes" comment="" />
+      <created>1717304894837</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717304894837</updated>
+      <workItem from="1750151617836" duration="4704000" />
+      <workItem from="1750166242957" duration="202000" />
+      <workItem from="1750166517194" duration="489000" />
+      <workItem from="1750209372263" duration="4199000" />
+      <workItem from="1750214893621" duration="1784000" />
+      <workItem from="1750227821054" duration="334000" />
+      <workItem from="1750236172334" duration="8716000" />
+      <workItem from="1750258849558" duration="2876000" />
+      <workItem from="1750338170880" duration="660000" />
+      <workItem from="1750395845617" duration="5837000" />
+      <workItem from="1750403074669" duration="4453000" />
+    </task>
+    <task id="LOCAL-00001" summary="Update-05-实现分布式事务用户注册与角色绑定原子性保障">
+      <option name="closed" value="true" />
+      <created>1750213801709</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750213801709</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Commit-最后处理细节并提交">
+      <option name="closed" value="true" />
+      <created>1750410175291</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1750410175291</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.puml" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="future-09" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update-05-实现分布式事务用户注册与角色绑定原子性保障" />
+    <MESSAGE value="Changes" />
+    <MESSAGE value="Commit-最后" />
+    <MESSAGE value="Commit-最后处理细节并提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit-最后处理细节并提交" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <!-- 背景和标题 -->
+  <rect width="1200" height="800" fill="#FAFAFA"/>
+  <text x="550" y="40" font-family="Microsoft YaHei" font-size="24" font-weight="bold" fill="#2C3E50" text-anchor="middle">用户权限管理系统 - 微服务架构</text>
+  
+  <!-- 层级分区 -->
+  <!-- 客户端层 -->
+  <rect x="100" y="70" width="900" height="120" fill="#EBF5FB" rx="8" ry="8" stroke="#A9CCE3" stroke-width="1"/>
+  <text x="130" y="100" font-family="Microsoft YaHei" font-size="18" font-weight="bold" fill="#2874A6">客户端层</text>
+  
+  <!-- 接入层 -->
+  <rect x="100" y="210" width="900" height="120" fill="#E9F7EF" rx="8" ry="8" stroke="#A9DFBF" stroke-width="1"/>
+  <text x="130" y="240" font-family="Microsoft YaHei" font-size="18" font-weight="bold" fill="#27AE60">接入层</text>
+  
+  <!-- 微服务层 -->
+  <rect x="100" y="350" width="900" height="200" fill="#FDEDEC" rx="8" ry="8" stroke="#F5B7B1" stroke-width="1"/>
+  <text x="130" y="380" font-family="Microsoft YaHei" font-size="18" font-weight="bold" fill="#E74C3C">微服务层</text>
+  
+  <!-- 数据层 -->
+  <rect x="100" y="570" width="900" height="120" fill="#F4ECF7" rx="8" ry="8" stroke="#D7BDE2" stroke-width="1"/>
+  <text x="130" y="600" font-family="Microsoft YaHei" font-size="18" font-weight="bold" fill="#8E44AD">数据层</text>
+  
+  <!-- 基础设施层 -->
+  <rect x="100" y="710" width="900" height="70" fill="#EAF2F8" rx="8" ry="8" stroke="#AED6F1" stroke-width="1"/>
+  <text x="130" y="740" font-family="Microsoft YaHei" font-size="18" font-weight="bold" fill="#2C3E50">基础设施层</text>
+
+  <!-- 客户端层组件 -->
+  <rect x="230" y="90" width="150" height="70" fill="#3498DB" rx="5" ry="5" stroke="#2980B9" stroke-width="1"/>
+  <text x="305" y="125" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Web前端</text>
+  <text x="305" y="145" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">(React/Vue)</text>
+
+  <rect x="480" y="90" width="150" height="70" fill="#3498DB" rx="5" ry="5" stroke="#2980B9" stroke-width="1"/>
+  <text x="555" y="125" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">移动端</text>
+  <text x="555" y="145" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">(iOS/Android)</text>
+
+  <rect x="730" y="90" width="150" height="70" fill="#3498DB" rx="5" ry="5" stroke="#2980B9" stroke-width="1"/>
+  <text x="805" y="125" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">第三方API调用</text>
+  
+  <!-- 接入层组件 -->
+  <rect x="230" y="230" width="150" height="80" fill="#2ECC71" rx="5" ry="5" stroke="#27AE60" stroke-width="1"/>
+  <text x="305" y="260" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">API Gateway</text>
+  <text x="305" y="280" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">Spring Cloud Gateway</text>
+  
+  <rect x="480" y="230" width="150" height="80" fill="#2ECC71" rx="5" ry="5" stroke="#27AE60" stroke-width="1"/>
+  <text x="555" y="260" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">负载均衡</text>
+  <text x="555" y="280" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">Dubbo</text>
+  
+  <rect x="730" y="230" width="150" height="80" fill="#2ECC71" rx="5" ry="5" stroke="#27AE60" stroke-width="1"/>
+  <text x="805" y="260" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">身份认证</text>
+  <text x="805" y="280" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">JWT</text>
+  
+  <!-- 服务注册与发现 -->
+  <rect x="130" y="390" width="150" height="80" fill="#F39C12" rx="5" ry="5" stroke="#D35400" stroke-width="1"/>
+  <text x="205" y="425" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">服务注册与发现</text>
+  <text x="205" y="445" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">Nacos</text>
+  
+  <!-- 微服务组件 -->
+  <rect x="330" y="390" width="150" height="80" fill="#E74C3C" rx="5" ry="5" stroke="#C0392B" stroke-width="1"/>
+  <text x="405" y="425" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">用户服务</text>
+  <text x="405" y="445" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">User Service</text>
+  
+  <rect x="530" y="390" width="150" height="80" fill="#E74C3C" rx="5" ry="5" stroke="#C0392B" stroke-width="1"/>
+  <text x="605" y="425" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">权限服务</text>
+  <text x="605" y="445" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">Permission Service</text>
+  
+  <rect x="730" y="390" width="150" height="80" fill="#E74C3C" rx="5" ry="5" stroke="#C0392B" stroke-width="1"/>
+  <text x="805" y="425" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">日志服务</text>
+  <text x="805" y="445" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">Logging Service</text>
+  
+  <!-- 消息队列 -->
+  <rect x="330" y="490" width="550" height="40" fill="#E67E22" rx="5" ry="5" stroke="#D35400" stroke-width="1"/>
+  <text x="605" y="515" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">消息队列 (RabbitMQ)</text>
+  
+  <!-- 数据层组件 -->
+  <rect x="330" y="590" width="300" height="80" fill="#9B59B6" rx="5" ry="5" stroke="#8E44AD" stroke-width="1"/>
+  <text x="480" y="625" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">MySQL + ShardingSphere</text>
+  <text x="480" y="645" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">分库分表</text>
+  
+  <rect x="680" y="590" width="200" height="80" fill="#9B59B6" rx="5" ry="5" stroke="#8E44AD" stroke-width="1"/>
+  <text x="780" y="625" font-family="Microsoft YaHei" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Redis集群</text>
+  <text x="780" y="645" font-family="Microsoft YaHei" font-size="12" fill="white" text-anchor="middle">缓存层</text>
+  
+  <!-- 基础设施层组件 -->
+  <rect x="130" y="720" width="180" height="40" fill="#34495E" rx="5" ry="5" stroke="#2C3E50" stroke-width="1"/>
+  <text x="220" y="745" font-family="Microsoft YaHei" font-size="12" font-weight="bold" fill="white" text-anchor="middle">容器化 K8s + Docker</text>
+  
+  <rect x="330" y="720" width="140" height="40" fill="#34495E" rx="5" ry="5" stroke="#2C3E50" stroke-width="1"/>
+  <text x="400" y="745" font-family="Microsoft YaHei" font-size="12" font-weight="bold" fill="white" text-anchor="middle">监控 Prometheus</text>
+  
+  <rect x="490" y="720" width="180" height="40" fill="#34495E" rx="5" ry="5" stroke="#2C3E50" stroke-width="1"/>
+  <text x="580" y="745" font-family="Microsoft YaHei" font-size="12" font-weight="bold" fill="white" text-anchor="middle">日志收集 ELK Stack</text>
+  
+  <rect x="690" y="720" width="140" height="40" fill="#34495E" rx="5" ry="5" stroke="#2C3E50" stroke-width="1"/>
+  <text x="760" y="745" font-family="Microsoft YaHei" font-size="12" font-weight="bold" fill="white" text-anchor="middle">CI/CD Jenkins</text>
+  
+  <!-- 图例 -->
+  <rect x="1020" y="90" width="30" height="15" fill="#3498DB" rx="2" ry="2"/>
+  <text x="1055" y="101" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50" text-anchor="start">客户端层</text>
+  
+  <rect x="1020" y="115" width="30" height="15" fill="#2ECC71" rx="2" ry="2"/>
+  <text x="1055" y="126" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50" text-anchor="start">接入层</text>
+  
+  <rect x="1020" y="140" width="30" height="15" fill="#E74C3C" rx="2" ry="2"/>
+  <text x="1055" y="151" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50" text-anchor="start">微服务层</text>
+  
+  <rect x="1020" y="165" width="30" height="15" fill="#9B59B6" rx="2" ry="2"/>
+  <text x="1055" y="176" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50" text-anchor="start">数据层</text>
+  
+  <rect x="1020" y="190" width="30" height="15" fill="#34495E" rx="2" ry="2"/>
+  <text x="1055" y="201" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50" text-anchor="start">基础设施层</text>
+  
+  <rect x="1020" y="215" width="30" height="15" fill="#F39C12" rx="2" ry="2"/>
+  <text x="1055" y="226" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50" text-anchor="start">服务治理</text>
+  
+  <rect x="1020" y="240" width="30" height="15" fill="#E67E22" rx="2" ry="2"/>
+  <text x="1055" y="251" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50" text-anchor="start">消息队列</text>
+
+  <!-- 连接类型图例 -->
+  <line x1="1020" y1="280" x2="1040" y2="280" stroke="#2C3E50" stroke-width="2"/>
+  <text x="1055" y="284" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50" text-anchor="start">同步调用</text>
+  
+  <line x1="1020" y1="305" x2="1040" y2="305" stroke="#2C3E50" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="1055" y="309" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50" text-anchor="start">异步调用</text>
+  
+  <!-- 定义箭头标记 -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
+        markerWidth="6" markerHeight="6"
+        orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2C3E50"/>
+    </marker>
+  </defs>
+  
+  <!-- 连线 - 客户端到接入层 -->
+  <!-- Web前端 到 API Gateway -->
+  <line x1="305" y1="160" x2="305" y2="220" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="325" y="200" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">HTTPS</text>
+  
+  <!-- 移动端 到 API Gateway -->
+  <line x1="555" y1="160" x2="315" y2="220" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="405" y="185" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">HTTPS</text>
+  
+  <!-- 移动端 到 负载均衡 -->
+  <line x1="555" y1="160" x2="555" y2="220" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="575" y="200" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">HTTPS</text>
+  
+  <!-- 第三方API 到 身份认证 -->
+  <line x1="805" y1="160" x2="805" y2="220" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="825" y="200" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">HTTPS</text>
+  
+  <!-- 连线 - 接入层到微服务层 -->
+  <!-- API Gateway 到 用户服务 -->
+  <line x1="305" y1="310" x2="395" y2="380" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="335" y="350" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">HTTP/Dubbo</text>
+  
+  <!-- 负载均衡 到 权限服务 -->
+  <line x1="555" y1="310" x2="595" y2="380" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="565" y="350" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">HTTP/Dubbo</text>
+  
+  <!-- 身份认证 到 用户服务 -->
+  <line x1="805" y1="310" x2="415" y2="380" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="605" y="335" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">验证用户</text>
+  
+  <!-- 身份认证 到 权限服务 -->
+  <line x1="805" y1="310" x2="615" y2="380" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="705" y="350" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">获取权限</text>
+  
+  <!-- Nacos连接 -->
+  <!-- Nacos 到 API Gateway -->
+  <line x1="205" y1="390" x2="295" y2="310" stroke="#2C3E50" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <text x="235" y="350" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">服务注册</text>
+  
+  <!-- Nacos 到 用户服务 -->
+  <line x1="280" y1="430" x2="320" y2="430" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- Nacos 到 权限服务 -->
+  <line x1="205" y1="430" x2="520" y2="430" stroke="#2C3E50" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  
+  <!-- Nacos 到 日志服务 -->
+  <line x1="205" y1="430" x2="720" y2="430" stroke="#2C3E50" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  
+  <!-- 微服务间调用关系 -->
+  <!-- 用户服务到权限服务 -->
+  <line x1="480" y1="430" x2="520" y2="430" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="500" y="420" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">Dubbo RPC</text>
+  
+  <!-- 微服务与消息队列的关系 -->
+  <!-- 用户服务到消息队列(写入) -->
+  <line x1="405" y1="470" x2="405" y2="480" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- 权限服务到消息队列(写入) -->
+  <line x1="605" y1="470" x2="605" y2="480" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- 消息队列到日志服务(读取) -->
+  <line x1="605" y1="510" x2="795" y2="470" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="695" y="480" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">消费消息</text>
+  
+  <!-- 微服务到数据层的连接 -->
+  <!-- 用户服务到MySQL -->
+  <line x1="405" y1="470" x2="405" y2="580" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- 权限服务到MySQL -->
+  <line x1="605" y1="470" x2="490" y2="580" stroke="#2C3E50" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- 微服务到Redis的连接 -->
+  <!-- 用户服务到Redis -->
+  <line x1="405" y1="470" x2="770" y2="580" stroke="#2C3E50" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <text x="590" y="520" font-family="Microsoft YaHei" font-size="12" fill="#2C3E50">缓存</text>
+  
+  <!-- 权限服务到Redis -->
+  <line x1="605" y1="470" x2="770" y2="580" stroke="#2C3E50" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  
+  <!-- 日志服务到Redis -->
+  <line x1="805" y1="470" x2="805" y2="580" stroke="#2C3E50" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+</svg>

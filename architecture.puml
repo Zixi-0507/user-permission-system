@@ -1,0 +1,134 @@
+@startuml 用户权限管理系统架构图
+
+' 设置样式和主题
+!define FONTNAME "Helvetica,Arial,sans-serif"
+skinparam defaultFontName FONTNAME
+skinparam defaultFontSize 12
+skinparam padding 5
+skinparam roundCorner 10
+skinparam handwritten false
+skinparam monochrome false
+skinparam shadowing false
+skinparam linetype ortho
+
+' 颜色定义
+!define CLIENT_COLOR #3498db
+!define GATEWAY_COLOR #2ecc71
+!define SERVICE_COLOR #e74c3c
+!define DATA_COLOR #9b59b6
+!define INFRA_COLOR #34495e
+!define REGISTRY_COLOR #f1c40f
+!define MQ_COLOR #e67e22
+
+' 组件样式定义
+skinparam rectangle {
+    BackgroundColor white
+    BorderColor black
+    FontColor black
+}
+
+skinparam component {
+    BackgroundColor white
+    BorderColor black
+    FontColor black
+}
+
+' 标题
+title **用户权限管理系统 - 微服务架构**
+
+' 布局方向
+top to bottom direction
+
+' 客户端层
+rectangle "客户端层" as ClientLayer {
+    rectangle "<color:white><b>Web前端</b>\nReact/Vue" as WebApp #CLIENT_COLOR
+    rectangle "<color:white><b>移动端</b>\niOS/Android" as MobileApp #CLIENT_COLOR
+    rectangle "<color:white><b>第三方API调用</b>" as ThirdParty #CLIENT_COLOR
+}
+
+' 接入层
+rectangle "接入层" as GatewayLayer {
+    rectangle "<color:white><b>API Gateway</b>\nSpring Cloud Gateway" as Gateway #GATEWAY_COLOR
+    rectangle "<color:white><b>负载均衡</b>\nDubbo" as LoadBalancer #GATEWAY_COLOR
+    rectangle "<color:white><b>身份认证</b>\nJWT" as Auth #GATEWAY_COLOR
+}
+
+' 服务注册与发现
+rectangle "<color:white><b>服务注册中心</b>\nNacos" as Registry #REGISTRY_COLOR
+
+' 微服务层
+rectangle "微服务层" as ServiceLayer {
+    rectangle "<color:white><b>用户服务</b>\nUser Service" as UserService #SERVICE_COLOR
+    rectangle "<color:white><b>权限服务</b>\nPermission Service" as PermissionService #SERVICE_COLOR
+    rectangle "<color:white><b>日志服务</b>\nLogging Service" as LoggingService #SERVICE_COLOR
+    rectangle "<color:white><b>消息队列</b>\nRabbitMQ" as MQ #MQ_COLOR
+}
+
+' 数据层
+rectangle "数据层" as DataLayer {
+    rectangle "<color:white><b>MySQL + ShardingSphere</b>\n分库分表" as MySQL #DATA_COLOR
+    rectangle "<color:white><b>Redis集群</b>\n缓存" as Redis #DATA_COLOR
+}
+
+' 基础设施层
+rectangle "基础设施层" as InfraLayer {
+    rectangle "<color:white><b>容器编排</b>\nK8s + Docker" as K8s #INFRA_COLOR
+    rectangle "<color:white><b>监控平台</b>\nPrometheus + Grafana" as Monitor #INFRA_COLOR
+    rectangle "<color:white><b>日志收集</b>\nELK Stack" as ELK #INFRA_COLOR
+    rectangle "<color:white><b>CI/CD</b>\nJenkins" as CICD #INFRA_COLOR
+}
+
+' 连接关系
+' 客户端到网关
+WebApp -[#gray]-> Gateway : HTTPS
+MobileApp -[#gray]-> Gateway : HTTPS
+ThirdParty -[#gray]-> Gateway : HTTPS
+
+' 网关层内部
+Gateway -[#gray]-> Auth : 认证
+Gateway -[#gray]-> LoadBalancer : 转发
+
+' 网关到服务
+LoadBalancer -[#gray]-> UserService : HTTP/Dubbo
+LoadBalancer -[#gray]-> PermissionService : HTTP/Dubbo
+LoadBalancer -[#gray]-> LoggingService : HTTP/Dubbo
+
+' 服务注册
+Registry .[#REGISTRY_COLOR].> LoadBalancer : 服务发现
+UserService .[#REGISTRY_COLOR].> Registry : 注册
+PermissionService .[#REGISTRY_COLOR].> Registry : 注册
+LoggingService .[#REGISTRY_COLOR].> Registry : 注册
+
+' 消息队列通信
+UserService -[#MQ_COLOR]-> MQ : 生产消息
+MQ -[#MQ_COLOR]-> LoggingService : 消费消息
+PermissionService -[#MQ_COLOR]-> MQ : 生产消息
+
+' 服务到数据层
+UserService -[#DATA_COLOR]-> MySQL : SQL
+PermissionService -[#DATA_COLOR]-> MySQL : SQL
+UserService -[#DATA_COLOR]-> Redis : Cache
+PermissionService -[#DATA_COLOR]-> Redis : Cache
+
+' 基础设施支持
+K8s .[#INFRA_COLOR].> ServiceLayer : 部署/编排
+Monitor .[#INFRA_COLOR].> ServiceLayer : 监控
+ELK .[#INFRA_COLOR].> ServiceLayer : 日志采集
+CICD .[#INFRA_COLOR].> ServiceLayer : 自动化部署
+
+' 图例
+legend right
+|= 颜色 |= 组件类型 |
+|<#CLIENT_COLOR>| 客户端层 |
+|<#GATEWAY_COLOR>| 接入层 |
+|<#SERVICE_COLOR>| 微服务层 |
+|<#DATA_COLOR>| 数据层 |
+|<#INFRA_COLOR>| 基础设施层 |
+|<#REGISTRY_COLOR>| 服务注册中心 |
+|<#MQ_COLOR>| 消息队列 |
+|= 线条 |= 通信类型 |
+|<b>——</b>| 同步通信 |
+|<b>····</b>| 异步/支持 |
+endlegend
+
+@enduml 
