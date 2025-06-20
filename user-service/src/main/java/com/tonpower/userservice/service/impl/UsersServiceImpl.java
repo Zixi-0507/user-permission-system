@@ -1,5 +1,4 @@
 package com.tonpower.userservice.service.impl;
-import java.util.Date;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
@@ -27,11 +26,14 @@ import com.tonpower.userservice.util.BeanDiffUtil;
 import com.tonpower.userservice.util.IpUtils;
 import com.tonpower.userservice.util.JwtUtils;
 import com.tonpower.userservice.util.SqlUtils;
-import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.shardingsphere.transaction.annotation.ShardingSphereTransactionType;
+import org.apache.shardingsphere.transaction.core.TransactionType;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.integration.support.MessageBuilder;
@@ -44,10 +46,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.Resource;
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Duration;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -64,6 +65,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         implements UsersService {
     @Resource
     private JwtConfig jwtConfig;
+    @Resource
+    private RedissonClient redissonClient;
     private final StreamBridge streamBridge;
     // 注入远程服务（Dubbo）
     @DubboReference(group = "permission-group", version = "1.0.0")
@@ -78,7 +81,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
      * @return 新用户id
      */
     @Override
-    @GlobalTransactional(timeoutMills = 300000, name = "user-service-tx")
+    @ShardingSphereTransactionType(TransactionType.BASE)
     public long userRegister(String username, String password, String checkPassword) {
 
         //1. 校验
@@ -166,6 +169,12 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
         }
         long userId = user.getUserId();
+        String redisKey = "login:user:" + userId;
+        RBucket<String> bucket = redissonClient.getBucket(redisKey);
+        if (bucket.isExists()) {
+            // 已经登录了，可以选择抛异常、踢出旧用户等
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "不能重复登录");
+        }
         //TODO 通过远程调用获取用户角色
         String userRole = permissionService.getUserRoleCode(userId);
         //TODO 生成JWT令牌
@@ -176,15 +185,16 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         claims.put("userRole", userRole);
         SecretKey secretKey = jwtConfig.secretKey();
         String token = JwtUtils.generateToken(claims, user.getUsername(), secretKey);
+        // 存入 Redis，设置与 JWT 过期时间一致
+        bucket.set(token, Duration.ofMillis(JwtConfig.JWT_EXPIRATION));
         LoginUserVO loginUserVO = getLoginUserVO(user);
         loginUserVO.setUserRole(userRole);
         loginUserVO.setToken(token);
         //发送登录日志
-//        String action = ActionConstant.LOGIN;
-//        sendMsg(action, userId);
+        String action = ActionConstant.LOGIN;
+        sendMsg(action, userId);
         return loginUserVO;
     }
-
     /**
      * 获取当前登录用户
      *
@@ -198,7 +208,9 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
             throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR, "请求上下文为空");
         }
         HttpServletRequest request = attributes.getRequest();
+        System.out.println(request);
         Object userObj = request.getAttribute("loginUser");
+        System.out.println(userObj);
         Users loginUser = (Users) userObj;
         if (loginUser == null) {
             throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR, "未获取到登录用户信息");
@@ -210,11 +222,27 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
             throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR, "登录用户不存在");
         }
         //发送获取登录用户日志
-//        String action = ActionConstant.GET_LOGIN_USER;
-//        sendMsg(action, userId);
+        String action = ActionConstant.GET_LOGIN_USER;
+        sendMsg(action, userId);
         return loginUser;
     }
-    //根据权限校验结果返回：<br>普通用户仅自己，管理员所有普通用户，超管全部
+    /**
+     * 用户注销
+     *
+     * @param
+     */
+    @Override
+    public boolean userLogout() {
+        Users currentUser = getLoginUser();
+        long userId = currentUser.getUserId();
+        String redisKey = "login:user:" + userId;
+        RBucket<String> bucket = redissonClient.getBucket(redisKey);
+        if (bucket.isExists()) {
+            bucket.delete();
+        }
+        return true;
+    }
+
 
 
     /**
@@ -346,14 +374,15 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         ThrowUtils.throwIf(pageSize > 20, ErrorCode.PARAMS_ERROR);
         Page<Users> usersPage = this.page(new Page<>(current, pageSize), queryWrapper);
         //发送获取用户列表日志
-//        String action = ActionConstant.LIST_USER_ALL;
-//        sendMsg(action, currentUser.getUserId());
+        String action = ActionConstant.LIST_USER_ALL;
+        sendMsg(action, currentUser.getUserId());
         return (Page<UserVO>) usersPage.convert(users -> {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(users, userVO);
             userVO.setUserRole(permissionService.getUserRoleCode(users.getUserId()));
             return userVO;
         });
+
 
     }
 
@@ -365,7 +394,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
      */
     @Override
     public Page<UserVO> listUserByPageWithAuth(UsersQueryRequest userQueryRequest) {
-        ThrowUtils.throwIf(userQueryRequest == null || userQueryRequest.getUserId()<=0, ErrorCode.PARAMS_ERROR);
+        ThrowUtils.throwIf(userQueryRequest == null, ErrorCode.PARAMS_ERROR);
         Users currentUser = getLoginUser(); // 获取当前登录用户
         String currentUserRole = permissionService.getUserRoleCode(currentUser.getUserId());
         QueryWrapper<Users> queryWrapper = this.getQueryWrapper(userQueryRequest);
@@ -397,9 +426,9 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         if (usersPage == null) {
             return new Page<>();
         }
-        // 发送不同权限获取用户列表日志
-//        String action = ActionConstant.LIST_USER_WITH_AUTH;
-//        sendMsg(action, currentUser.getUserId());
+        //发送不同权限获取用户列表日志
+        String action = ActionConstant.LIST_USER_WITH_AUTH;
+        sendMsg(action, currentUser.getUserId());
         return (Page<UserVO>) usersPage.convert(users -> {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(users, userVO);
@@ -409,7 +438,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
     }
 
     /**
-     *
+     * 修改用户信息
      * @param usersUpdateRequest
      * @return
      */
@@ -424,7 +453,6 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         if (oldUser == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-
         Users currentUser = getLoginUser();
         String currentUserRole = permissionService.getUserRoleCode(currentUser.getUserId());
         //根据权限限制：<br>普通用户改自己，管理员改普通用户和改自己，超管改所有
@@ -439,11 +467,18 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
                 throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "管理员不能修改超级管理员");
             }
         }
+        if(usersUpdateRequest.getUserRole()!=null&&UserRoleEnum.USER.getRoleCode().equals(usersUpdateRequest.getUserRole())){
+            permissionService.upgradeToAdmin(userId);
+        }else if(usersUpdateRequest.getUserRole()!=null&&UserRoleEnum.ADMIN.getRoleCode().equals(usersUpdateRequest.getUserRole())){
+            permissionService.downgradeToUser(userId);
+        }else {
+            throw new BusinessException(ErrorCode.OPERATION_ERROR,"不能修改自己权限");
+        }
         Users users = new Users();
-        BeanUtils.copyProperties(usersUpdateRequest, users);
+        BeanUtils.copyProperties(usersUpdateRequest,users);
         // 发送日志
-//        String action = ActionConstant.UPDATE_USER;
-//        sendMsg(action, currentUser.getUserId());
+        String action = ActionConstant.UPDATE_USER;
+        sendMsg(action, currentUser.getUserId(), oldUser, users);
         return true;
     }
 
@@ -458,6 +493,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         Long userId = userPasswordUpdateRequest.getUserId();
+        QueryWrapper<Users> usersQueryWrapper = new QueryWrapper<>();
+        usersQueryWrapper.eq("user_id", userId);
         Users currentUser = getLoginUser();
         String currentUserRole = permissionService.getUserRoleCode(currentUser.getUserId());
         String oldPassword = userPasswordUpdateRequest.getOldPassword();
@@ -497,9 +534,16 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         // 加密新密码并更新
         String encryptedNewPassword = getEncryptPassword(newPassword);
         oldUser.setPassword(encryptedNewPassword);
+        Users user = new Users();
+        BeanUtils.copyProperties(oldUser,user);
+        boolean result = this.update(user,usersQueryWrapper);
+        if (!result) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "重置密码失败");
+        }
         // 发送日志
-//        String action = ActionConstant.RESET_PASSWORD;
-//        sendMsg(action, currentUser.getUserId());
+        String action = ActionConstant.RESET_PASSWORD;
+        sendMsg(action, currentUser.getUserId(),oldUser,user);
+        redissonClient.getBucket("login:token:" + userId).delete();
         return true;
     }
 
@@ -549,6 +593,14 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users>
         Message<String> streamMessage = MessageBuilder.withPayload(logMessage).build();
         streamBridge.send("handleMessage-out-0", streamMessage);
     }
-
+    private void sendMsg(String action, long userId) {
+        String ip = IpUtils.getIpAddress();
+        String logMessage = String.format(
+                "{\"action\":\"%s\",\"userId\":%d,\"ip\":\"%s\"}",
+                action, userId, ip
+        );
+        Message<String> streamMessage = MessageBuilder.withPayload(logMessage).build();
+        streamBridge.send("handleMessage-out-0", streamMessage);
+    }
 
 }

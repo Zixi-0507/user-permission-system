@@ -21,6 +21,13 @@ spring:
           destination: logging-service-topic
         handleMessage-in-0:
           destination: logging-service-topic
+  # redis配置
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+    timeout: 5000
+    password: "050704"
   # mq配置
   rabbitmq:
     host: localhost
@@ -104,9 +111,9 @@ knife4j:
 dubbo:
   application:
     name: user-service-consumer
+    qos-port: 33333
   registry:
     address: nacos://localhost:8848  # Dubbo 使用 Nacos 做注册中心
-
 
 seata:
   # 这里直接关闭，不要怀疑，因为我们使用是shardingsphere集成Seata柔性事务，已在resource目录下的seata.conf中配置，seata其实被shardingsphere包装了

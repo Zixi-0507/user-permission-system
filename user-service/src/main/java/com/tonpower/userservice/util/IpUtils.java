@@ -17,7 +17,7 @@ public class IpUtils {
         HttpServletRequest request = attributes.getRequest();
         String ip = request.getHeader("X-Forwarded-For");
         if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
+            ip = request.getRemoteHost();
         }
         return ip;
     }

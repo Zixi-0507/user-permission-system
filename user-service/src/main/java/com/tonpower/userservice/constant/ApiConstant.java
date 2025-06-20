@@ -5,7 +5,6 @@ public interface ApiConstant {
 
     String USER_LOGIN = "/user/login";
     String USER_REGISTER = "/user/register";
-    String USER_LOGOUT = "/user/logout";
     String DOC_HTML = "/doc.html";
     String SWAGGER_RESOURCES = "/swagger-resources/**";
     String SWAGGER_UI = "/swagger-ui.html";

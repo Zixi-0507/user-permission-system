@@ -28,7 +28,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         ApiConstant.USER_REGISTER,
                         ApiConstant.USER_LOGIN,
-                        ApiConstant.USER_LOGOUT,
                         ApiConstant.ERROR,
                         ApiConstant.V2_API_DOCS,
                         ApiConstant.V3_API_DOCS,

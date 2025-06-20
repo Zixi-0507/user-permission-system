@@ -13,9 +13,14 @@
         <module name="logging-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-gateway-server" target="11" />
+      <module name="user-permisssion-service" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway-server" options="-parameters" />
       <module name="logging-service" options="-parameters" />
       <module name="permission-service-api" options="-parameters" />
       <module name="permission-service-provider" options="-parameters" />

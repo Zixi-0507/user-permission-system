@@ -7,6 +7,8 @@ import com.tonpower.userservice.model.entity.Users;
 import com.tonpower.userservice.util.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -22,6 +24,8 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
     @Resource
     private SecretKey secretKey;
+    @Resource
+    private RedissonClient redissonClient;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -61,12 +65,18 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
         if (!JwtUtils.validateToken(token, secretKey)) {
             throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR, "token无效或已过期");
         }
-
         // 从token中获取用户信息
         Long userId = JwtUtils.getUserIdFromToken(token, secretKey);
         String username = JwtUtils.getUsernameFromToken(token, secretKey);
         String userRole = JwtUtils.getUserRoleFromToken(token, secretKey);
-
+        System.out.println(userId);
+        // 校验 token 是否存在于 Redis 中（即是否为有效登录）
+        RBucket<String> bucket = redissonClient.getBucket("login:user:" + userId);
+        System.out.println(bucket.get());
+        String storedToken = bucket.get();
+        if (storedToken == null || !storedToken.equals(token)) {
+            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR, "token不存在或已被注销");
+        }
 //         构建用户对象并存入请求属性中，供后续使用
         Users user = new Users();
         user.setUserId(userId);

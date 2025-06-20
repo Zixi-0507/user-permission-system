@@ -35,6 +35,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- Spring Boot JDBC 启动器，提供数据库访问的基础支持，包括 DataSource 和 JdbcTemplate -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
         <!-- MySQL 数据库驱动，运行时需要，用于连接和操作 MySQL 数据库 -->
         <dependency>
             <groupId>com.mysql</groupId>
@@ -158,7 +163,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
         </dependency>
-
+        <!--redisson-->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.45.1</version>
+        </dependency>
 
     </dependencies>
     <dependencyManagement>

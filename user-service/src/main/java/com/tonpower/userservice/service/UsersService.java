@@ -38,6 +38,13 @@ public interface UsersService extends IService<Users> {
      */
     LoginUserVO userLogin(String username, String password);
     /**
+     * 用户注销
+     *
+     * @param
+     * @return
+     */
+    boolean userLogout();
+    /**
      * 获取当前登录用户
      *
      * @param
