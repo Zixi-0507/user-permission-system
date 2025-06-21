@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tonpower.loggingservice.mapper.OperationLogsMapper">
+
+    <resultMap id="BaseResultMap" type="com.tonpower.loggingservice.model.entity.OperationLogs">
+            <id property="logId" column="log_id" />
+            <result property="userId" column="user_id" />
+            <result property="action" column="action" />
+            <result property="ip" column="ip" />
+            <result property="detail" column="detail" />
+            <result property="gmtCreate" column="gmt_create" />
+            <result property="gmtModified" column="gmt_modified" />
+            <result property="isDeleted" column="is_deleted" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        log_id,user_id,action,ip,detail,gmt_create,
+        gmt_modified,is_deleted
+    </sql>
+</mapper>
